@@ -27,9 +27,13 @@ function CountBadge({ count }: { count: number }) {
   );
 }
 
-export default function Header() {
+interface HeaderProps {
+  menuOpen: boolean;
+  setMenuOpen: (open: boolean) => void;
+}
+
+export default function Header({ menuOpen, setMenuOpen }: HeaderProps) {
   const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const { totalItems } = useCart();
   const { count } = useWishlist();
@@ -49,7 +53,6 @@ export default function Header() {
       )}
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:h-20 sm:px-6 lg:px-8">
-        {/* Mobile: menu button */}
         <button
           type="button"
           onClick={() => setMenuOpen(true)}
