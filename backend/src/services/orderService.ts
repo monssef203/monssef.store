@@ -313,13 +313,22 @@ export async function cancelOrder(orderId: string, userId: string) {
   });
 }
 
-export async function updateOrderStatus(orderId: string, status: OrderStatus) {
+export async function updateOrderStatus(orderId: string, status: string | string[]): Promise<any> {
   const order = await prisma.order.findUnique({ where: { id: orderId } });
   if (!order) throw new Error("Order not found");
 
+  let statusStr: string;
+  if (typeof status === "string") {
+    statusStr = status;
+  } else if (Array.isArray(status) && status.length > 0 && typeof status[0] === "string") {
+    statusStr = status[0];
+  } else {
+    statusStr = "PENDING";
+  }
+
   return prisma.order.update({
     where: { id: orderId },
-    data: { status },
+    data: { status: statusStr },
     include: {
       items: { select: { id: true, productId: true, productName: true, quantity: true, unitPrice: true, totalPrice: true } },
       payment: { select: { id: true, status: true } },
@@ -345,4 +354,11 @@ export async function markPaymentPaid(orderId: string) {
       },
     });
   });
+}
+
+// Helper to convert string | string[] to string
+export function toStringValue(val: string | string[] | undefined, fallback: string = ""): string {
+  if (typeof val === "string") return val;
+  if (Array.isArray(val)) return val[0] || fallback;
+  return fallback;
 }

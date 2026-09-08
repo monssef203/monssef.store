@@ -4,11 +4,12 @@
  * HTTP handlers for admin dashboard and management endpoints.
  */
 
-import { Request, Response, NextFunction } from "express";
-import { requireAuth, requireAdmin } from "../middleware/AuthMiddleware.js";
-import { sendJSON, sendError, parsePagination, effectivePrice, discountPercent } from "../utils/helpers.js";
-import { PrismaClient } from "@prisma/client";
-import { ValidationError, NotFoundError, ForbiddenError } from "../utils/errors.js";
+import { Request, Response } from "express";
+import * as orderService from "../services/orderService.js";
+import { sendJSON, sendError } from "../utils/helpers.js";
+import { AppError } from "../utils/errors.js";
+import { Role } from "../types/roles.js";
+import prisma from "../services/prisma.js";
 
 // ─────────────────────────────────────────────
 // GET /api/admin/dashboard
