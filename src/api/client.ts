@@ -8,7 +8,7 @@
 const API_BASE = import.meta.env.VITE_API_BASE_URL || "/api";
 
 // Helper to get auth token from localStorage
-function getAuthToken(): string | null {
+export function getAuthToken(): string | null {
   if (typeof window === "undefined") return null;
   return localStorage.getItem("monstore_token");
 }
@@ -54,7 +54,7 @@ function handleResponse<T>(res: Response): T {
   if (res.status === 204) {
     return null as T;
   }
-  return res.json();
+  return res.json() as T;
 }
 
 // Custom error class
@@ -71,7 +71,7 @@ export class ApiError extends Error {
 }
 
 // API request helper
-async function request<T>(
+export async function request<T>(
   endpoint: string,
   options: RequestInit = {},
   auth = true
@@ -484,7 +484,6 @@ export const cartApi = {
           slug: string;
           price: number;
           discountPrice: number | null;
-          price: number;
           stock: number;
           status: string;
           isFeatured: boolean;
@@ -522,7 +521,6 @@ export const cartApi = {
             slug: string;
             price: number;
             discountPrice: number | null;
-            price: number;
             stock: number;
             status: string;
             isFeatured: boolean;
@@ -564,7 +562,6 @@ export const cartApi = {
             slug: string;
             price: number;
             discountPrice: number | null;
-            price: number;
             stock: number;
             status: string;
             isFeatured: boolean;
@@ -605,7 +602,6 @@ export const cartApi = {
             slug: string;
             price: number;
             discountPrice: number | null;
-            price: number;
             stock: number;
             status: string;
             isFeatured: boolean;
@@ -645,7 +641,6 @@ export const cartApi = {
             slug: string;
             price: number;
             discountPrice: number | null;
-            price: number;
             stock: number;
             status: string;
             isFeatured: boolean;
@@ -685,7 +680,6 @@ export const cartApi = {
             slug: string;
             price: number;
             discountPrice: number | null;
-            price: number;
             stock: number;
             status: string;
             isFeatured: boolean;

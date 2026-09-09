@@ -16,4 +16,17 @@ export default defineConfig({
       "@": path.resolve(__dirname, "src"),
     },
   },
+  // Dev only: proxy API calls to the MONSTORE backend so the admin panel can
+  // use same-origin relative /api URLs in development. Point it elsewhere with
+  // VITE_API_PROXY_TARGET if your local backend runs on another origin.
+  server: {
+    // Dev preview environments use arbitrary hosts — allow them all in dev.
+    allowedHosts: true,
+    proxy: {
+      "/api": {
+        target: process.env.VITE_API_PROXY_TARGET || "http://localhost:4000",
+        changeOrigin: true,
+      },
+    },
+  },
 });
