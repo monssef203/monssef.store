@@ -1,7 +1,7 @@
 import { useState, type FormEvent } from "react";
-import { Mail, MapPin, MessageCircle, Phone, CheckCircle2 } from "lucide-react";
+import { Mail, MapPin, Phone, CheckCircle2 } from "lucide-react";
 import Breadcrumbs from "../components/Breadcrumbs";
-import { buildWhatsAppLink, CONTACT_CITY, CONTACT_EMAIL, CONTACT_PHONE, STORE_NAME } from "../config/config";
+import { CONTACT_CITY, CONTACT_EMAIL, CONTACT_PHONE } from "../config/config";
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
@@ -24,19 +24,6 @@ export default function Contact() {
 
       <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-[1fr_1.2fr]">
         <div className="space-y-4">
-          <a
-            href={buildWhatsAppLink(`Bonjour ${STORE_NAME}, j'ai une question.`)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="tap-scale flex items-center gap-3 rounded-2xl bg-[#25D366] p-5 text-white"
-          >
-            <MessageCircle className="h-5 w-5 shrink-0" />
-            <div>
-              <p className="text-sm font-semibold">WhatsApp</p>
-              <p className="text-xs text-white/90">Réponse rapide, du lundi au samedi</p>
-            </div>
-          </a>
-
           <div className="flex items-center gap-3 rounded-2xl bg-white p-5">
             <Phone className="h-5 w-5 shrink-0 text-[var(--color-gold)]" />
             <div>
