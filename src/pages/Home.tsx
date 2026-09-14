@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Truck, ShieldCheck, RotateCcw, MessageCircle, Star } from "lucide-react";
+import { ArrowRight, Truck, ShieldCheck, RotateCcw, Star } from "lucide-react";
 import { PRODUCTS } from "../data/products";
 import ProductCard from "../components/ProductCard";
 import Reveal from "../components/Reveal";
-import { buildWhatsAppLink, STORE_NAME } from "../config/config";
 
 const COLLECTION_CARDS = [
   { name: "Héritage", tagline: "Élégance intemporelle", image: "/images/products/classic-black-steel.jpg" },
@@ -20,7 +19,7 @@ const VALUES = [
 
 const TESTIMONIALS = [
   { name: "Youssef B.", city: "Casablanca", rating: 5, text: "Qualité exceptionnelle, livraison rapide. Exactement comme sur les photos." },
-  { name: "Salma K.", city: "Rabat", rating: 5, text: "Le service client est très réactif sur WhatsApp. Ma montre est magnifique." },
+  { name: "Salma K.", city: "Rabat", rating: 5, text: "Excellente montre et équipe réactive. Hautement recommandé." },
   { name: "Amine T.", city: "Marrakech", rating: 4, text: "Beau produit, bon rapport qualité-prix. Je recommande MONSTORE." },
 ];
 
@@ -205,7 +204,7 @@ export default function Home() {
                       <Star key={idx} className={`h-4 w-4 ${idx < t.rating ? "fill-[var(--color-gold)] text-[var(--color-gold)]" : "fill-neutral-200 text-neutral-200"}`} />
                     ))}
                   </div>
-                  <p className="mt-3 text-sm leading-relaxed text-neutral-600">“{t.text}”</p>
+                  <p className="mt-3 text-sm leading-relaxed text-neutral-600">"{t.text}"</p>
                   <p className="mt-4 text-sm font-medium text-[var(--color-ink)]">
                     {t.name} <span className="font-normal text-neutral-400">— {t.city}</span>
                   </p>
@@ -214,29 +213,6 @@ export default function Home() {
             ))}
           </div>
         </div>
-      </section>
-
-      {/* WhatsApp CTA */}
-      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
-        <Reveal>
-          <div className="flex flex-col items-center gap-5 rounded-3xl bg-[var(--color-ink)] px-6 py-12 text-center sm:px-12">
-            <h2 className="font-display max-w-lg text-3xl text-white sm:text-4xl">
-              Une question avant d'acheter ?
-            </h2>
-            <p className="max-w-md text-sm text-neutral-300">
-              Notre équipe est disponible sur WhatsApp pour vous conseiller et confirmer votre commande.
-            </p>
-            <a
-              href={buildWhatsAppLink(`Bonjour ${STORE_NAME}, j'ai une question.`)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="tap-scale flex items-center gap-2 rounded-full bg-[#25D366] px-6 py-3.5 text-sm font-semibold text-white hover:brightness-95"
-            >
-              <MessageCircle className="h-4 w-4" />
-              Discuter sur WhatsApp
-            </a>
-          </div>
-        </Reveal>
       </section>
     </div>
   );
